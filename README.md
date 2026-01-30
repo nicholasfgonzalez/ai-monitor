@@ -158,3 +158,12 @@ If you find issues, edge cases, or have ideas for improvement, feedback is welco
 ---
 
 **AI Monitor** — making AI involvement visible, one signal at a time.
+
+---
+
+## Ownership
+
+AI Monitor is created and maintained by **Nic Gonzalez Design**.
+
+This project is an independent exploration of transparency and human–AI interaction and is not affiliated with Google, OpenAI, or any AI platform.
+
