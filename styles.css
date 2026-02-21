@@ -1,0 +1,494 @@
+/* AI METER – Isolated styles (MV3-safe, WCAG AA) */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   CRITICAL: Isolate from host page CSS
+   ══════════════════════════════════════════════════════════════════════════ */
+#ai-meter-root {
+  all: initial;
+}
+
+#ai-meter-root {
+  /* Colours */
+  --aim-bg:           #131315;
+  --aim-border:       #38383A;
+  --aim-text:         #FFFFFF;
+  --aim-muted:        #A0A0A0;
+  --aim-status-color: #65A5FF;
+
+  /* Type */
+  --aim-font:   Arial, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --aim-size:   14px;
+  --aim-title:  18px;
+  --aim-metric: 24px;
+  --aim-weight: 600;
+
+  /* Layout - Global */
+  --aim-radius-pill:  16px;
+  --aim-radius-panel: 16px;
+  --aim-dot:          7px;
+  --aim-btn:          32px;
+  --aim-shadow:       0 20px 60px rgba(0,0,0,.6);
+  --aim-z:            2147483647;
+
+  position:   fixed !important;
+  bottom:     16px !important; /* SPACING: distance from bottom of screen */
+  z-index:    var(--aim-z) !important;
+  font-family:var(--aim-font) !important;
+  font-size:  var(--aim-size) !important;
+  line-height:1.25 !important;
+  color:      var(--aim-text) !important;
+  -webkit-font-smoothing: antialiased !important;
+  text-rendering: optimizeLegibility !important;
+  box-sizing: border-box !important;
+}
+
+#ai-meter-root *, 
+#ai-meter-root *::before, 
+#ai-meter-root *::after {
+  box-sizing: border-box !important;
+  font-family: var(--aim-font) !important;
+}
+
+/* Position variants */
+/* SPACING: distance from left/right edge of screen */
+#ai-meter-root.left   { left: 16px !important; right: auto !important; }
+#ai-meter-root.right  { right: 16px !important; left: auto !important; }
+#ai-meter-root.center { left: 50% !important; transform: translateX(-50%) !important; }
+
+/* Dot colour mapping */
+#ai-meter-root .dot-green   { --aim-status-color: #3CCB7F; }
+#ai-meter-root .dot-blue    { --aim-status-color: #65A5FF; }
+#ai-meter-root .dot-yellow  { --aim-status-color: #F2C94C; }
+#ai-meter-root .dot-magenta { --aim-status-color: #B95EFF; }
+
+/* ── Shared surface ────────────────────────────────────────────────────────── */
+#ai-meter-root .ai-me-panel,
+#ai-meter-root .ai-me-pill {
+  display: block !important;
+  background:  var(--aim-bg) !important;
+  border:      1px solid var(--aim-border) !important;
+  box-shadow:  var(--aim-shadow) !important;
+  color:       var(--aim-text) !important;
+}
+
+/* ── Panel ─────────────────────────────────────────────────────────────────── */
+#ai-meter-root .ai-me-panel {
+  position:       absolute !important;
+  bottom:         0 !important;
+  left:           0 !important; /* SPACING: panel left offset */
+  right:          0 !important; /* SPACING: panel right offset */
+  top:            auto !important; /* SPACING: panel top offset (auto = from bottom) */
+  width:          320px !important;
+  border-radius:  var(--aim-radius-panel) !important;
+  padding:        16px 16px 18px 16px !important; /* SPACING: top right bottom left */
+  display:        flex !important;
+  flex-direction: column !important;
+  gap:            0 !important; /* No gap - using individual margins instead */
+}
+
+/* ── Pill ──────────────────────────────────────────────────────────────────── */
+#ai-meter-root .ai-me-pill {
+  position:      absolute !important;
+  bottom:        0 !important;
+  left:          0 !important; /* SPACING: pill left offset */
+  right:         0 !important; /* SPACING: pill right offset */
+  top:           auto !important; /* SPACING: pill top offset (auto = from bottom) */
+  display:       flex !important;
+  align-items:   center !important;
+  gap:           12px !important; /* SPACING: gap between dot and text */
+  padding:       16px 18px 16px 16px !important; /* SPACING: top right bottom left */
+  border-radius: var(--aim-radius-pill) !important;
+  cursor:        pointer !important;
+  user-select:   none !important;
+  -webkit-user-select: none !important;
+  touch-action:  none !important;
+  width:         max-content !important;
+}
+
+/* Position-specific alignment */
+#ai-meter-root.left .ai-me-panel,
+#ai-meter-root.left .ai-me-pill {
+  left: 0 !important;
+  right: auto !important;
+}
+
+#ai-meter-root.right .ai-me-panel,
+#ai-meter-root.right .ai-me-pill {
+  right: 0 !important;
+  left: auto !important;
+}
+
+#ai-meter-root.center .ai-me-panel,
+#ai-meter-root.center .ai-me-pill {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Transform origins */
+#ai-meter-root.left .ai-me-panel,
+#ai-meter-root.left .ai-me-pill {
+  transform-origin: bottom left !important;
+}
+
+#ai-meter-root.right .ai-me-panel,
+#ai-meter-root.right .ai-me-pill {
+  transform-origin: bottom right !important;
+}
+
+#ai-meter-root.center .ai-me-panel,
+#ai-meter-root.center .ai-me-pill {
+  transform-origin: bottom center !important;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────────── */
+#ai-meter-root .ai-me-header {
+  display:         flex !important;
+  align-items:     center !important;
+  justify-content: space-between !important;
+  gap:             12px !important; /* SPACING: gap between header elements */
+}
+#ai-meter-root .ai-me-header-left {
+  display:     flex !important;
+  align-items: center !important;
+  gap:         12px !important; /* SPACING: gap between dot and title */
+  min-width:   0 !important;
+}
+#ai-meter-root .ai-me-title {
+  display:      block !important;
+  margin:       0 !important;
+  padding:      0 !important;
+  font-size:    18px !important; /* FONT SIZE: panel title (e.g., "ChatGPT", "AI Signals Detected") */
+  font-weight:  var(--aim-weight) !important;
+  letter-spacing: .2px !important;
+  color:        var(--aim-text) !important;
+}
+#ai-meter-root .ai-me-status {
+  display:      block !important;
+  font-size:    14px !important; /* FONT SIZE: pill text (e.g., "ChatGPT", "No AI Detected") */
+  font-weight:  var(--aim-weight) !important;
+  letter-spacing: .2px !important;
+  color:        var(--aim-text) !important;
+}
+
+/* ── Status dot ────────────────────────────────────────────────────────────── */
+#ai-meter-root .ai-me-dot {
+  display:      block !important;
+  position:     relative !important;
+  width:        var(--aim-dot) !important;
+  height:       var(--aim-dot) !important;
+  border-radius:50% !important;
+  background:   #FFFFFF !important;
+  border:       2px solid var(--aim-status-color) !important;
+  flex-shrink:  0 !important;
+  overflow:     visible !important; /* ensure rings aren't clipped */
+}
+/* Smooth gradient radar pulses */
+#ai-meter-root .ai-me-dot::before,
+#ai-meter-root .ai-me-dot::after {
+  content:      "" !important;
+  display:      block !important;
+  position:     absolute !important;
+  top:          -2px !important;
+  left:         -2px !important;
+  width:        calc(100% + 4px) !important;
+  height:       calc(100% + 4px) !important;
+  border-radius:50% !important;
+  border:       2px solid var(--aim-status-color) !important;
+  background:   transparent !important;
+  box-sizing:   border-box !important;
+}
+#ai-meter-root .ai-me-dot::before {
+  animation:    aiMeRadar 4s ease-out infinite !important;
+}
+#ai-meter-root .ai-me-dot::after {
+  animation:    aiMeRadar 4s ease-out infinite 2s !important;
+}
+#ai-meter-root .ai-me-dot.ai-me-dot--active {
+  box-shadow: 0 0 8px var(--aim-status-color),
+              0 0 18px var(--aim-status-color),
+              0 0 28px rgba(0,0,0,.35) !important;
+}
+
+@keyframes aiMeRadar {
+  0%   { transform: scale(1); opacity: 0.35; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* ── Close button ──────────────────────────────────────────────────────────── */
+#ai-meter-root .ai-me-caretBtn {
+  display:      grid !important;
+  width:        var(--aim-btn) !important;
+  height:       var(--aim-btn) !important;
+  border-radius:8px !important;
+  border:       none !important;
+  background:   rgba(255,255,255,.06) !important;
+  color:        var(--aim-text) !important;
+  place-items:  center !important;
+  padding:      0 !important;
+  cursor:       pointer !important;
+  transition:   background .18s ease !important;
+  flex-shrink:  0 !important;
+}
+#ai-meter-root .ai-me-caretBtn:hover  { background: rgba(255,255,255,.14) !important; }
+#ai-meter-root .ai-me-caretBtn:focus-visible,
+#ai-meter-root .ai-me-pill:focus-visible {
+  outline:        2px solid rgba(101,165,255,.9) !important;
+  outline-offset: 2px !important;
+}
+
+/* ── Description ───────────────────────────────────────────────────────────── */
+#ai-meter-root .ai-me-desc {
+  display:       block !important;
+  margin:        0 0 16px 0 !important; /* SPACING: gap below description (before divider) */
+  padding:       0 !important;
+  color:         var(--aim-muted) !important;
+  font-size:     14px !important; /* FONT SIZE: description text (e.g., "AI chat, powered by OpenAI.") */
+}
+
+/* ── Divider ───────────────────────────────────────────────────────────────── */
+#ai-meter-root .ai-me-divider {
+  display:    block !important;
+  height:     1px !important;
+  background: var(--aim-border) !important;
+  margin:     0 0 16px 0 !important; /* SPACING: gap below divider (before "Your AI footprint") */
+  border:     none !important;
+}
+
+/* ── Readout ───────────────────────────────────────────────────────────────── */
+#ai-meter-root .ai-me-readout {
+  display:        flex !important;
+  flex-direction: column !important;
+  gap:            0 !important; /* No gap - using individual margins */
+}
+#ai-meter-root .ai-me-sectionLabel {
+  display:    block !important;
+  margin:     0 0 4px 0 !important; /* SPACING: gap below "Your AI footprint today ≈" line */
+  padding:    0 !important;
+  color:      var(--aim-muted) !important;
+  font-size:  14px !important; /* FONT SIZE: "Your AI footprint today" label */
+}
+/* Equivalency row with shuffle button */
+#ai-meter-root .ai-me-equiv-row {
+  display:         flex !important;
+  align-items:     center !important;
+  justify-content: space-between !important;
+  gap:             12px !important;
+  margin:          0 0 12px 0 !important; /* SPACING: gap below comparison (before metrics) */
+}
+/* Equivalency text */
+#ai-meter-root .ai-me-equivalency {
+  display:    block !important;
+  margin:     0 !important;
+  padding:    0 !important;
+  color:      #FFFFFF !important; /* white for number and text */
+  font-size:  18px !important; /* FONT SIZE: equivalency text (e.g., "≈ 16 loads of laundry") */
+  font-weight:  var(--aim-weight) !important;
+  flex:       1 !important;
+}
+/* Shuffle button - matches caret button style */
+#ai-meter-root .ai-me-shuffleBtn {
+  display:      grid !important;
+  width:        var(--aim-btn) !important;
+  height:       var(--aim-btn) !important;
+  border-radius:8px !important;
+  border:       none !important;
+  background:   rgba(255,255,255,.06) !important;
+  color:        var(--aim-text) !important;
+  place-items:  center !important;
+  padding:      0 !important;
+  cursor:       pointer !important;
+  transition:   background .18s ease !important;
+  flex-shrink:  0 !important;
+  position:     relative !important;
+  z-index:      100 !important; /* Above everything */
+  pointer-events: auto !important; /* ALWAYS clickable */
+}
+/* Force clickability even when parent has pointer-events: none */
+#ai-meter-root[data-expanded="true"] .ai-me-shuffleBtn,
+#ai-meter-root[data-expanded="false"] .ai-me-shuffleBtn {
+  pointer-events: auto !important;
+  z-index: 100 !important;
+}
+#ai-meter-root .ai-me-shuffleBtn:hover {
+  background: rgba(255,255,255,.14) !important;
+}
+#ai-meter-root .ai-me-shuffleBtn:focus-visible {
+  outline:        2px solid rgba(101,165,255,.9) !important;
+  outline-offset: 2px !important;
+}
+#ai-meter-root .ai-me-shuffleBtn svg {
+  display: block !important;
+  width:   12px !important;
+  height:  12px !important;
+}
+#ai-meter-root .ai-me-shuffleBtn svg path {
+  fill: white !important;
+}
+/* Muted ≈ symbol */
+#ai-meter-root .ai-me-approx {
+  color: var(--aim-muted) !important;
+  font-size: inherit !important; /* inherits from equivalency */
+}
+#ai-meter-root .ai-me-metrics-row {
+  display:         flex !important;
+  justify-content: flex-start !important; /* align to left */
+  align-items:     center !important;
+  gap:             32px !important; /* SPACING: horizontal gap between each metric */
+  width:           100% !important;
+  margin:          0 !important; /* SPACING: no extra margin (equivalency handles gap above) */
+}
+#ai-meter-root .ai-me-metric {
+  display:         flex !important;
+  align-items:     center !important;
+  gap:             4px !important; /* SPACING: gap within each metric (icon/value/unit) */
+  flex:            0 0 auto !important; /* don't grow, stay compact */
+  justify-content: flex-start !important; /* align contents to left */
+}
+}
+#ai-meter-root .ai-me-value {
+  display:          block !important;
+  font-size:        24px !important; /* FONT SIZE: metric numbers (197, 1588, 667) */
+  font-weight:      var(--aim-weight) !important;
+  letter-spacing:   0px !important;
+  line-height:      1 !important;
+  color:            var(--aim-text) !important;
+  font-variant-numeric: tabular-nums !important;
+}
+#ai-meter-root .ai-me-icon {
+  display:     flex !important;
+  width:       12px !important;
+  height:      12px !important;
+  opacity:     0.6 !important;
+  flex-shrink: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-right: -2px !important; /* SPACING: pull icon closer to text (negative = closer, positive = further) */
+}
+#ai-meter-root .ai-me-icon svg {
+  display: block !important;
+  width:   12px !important;
+  height:  12px !important;
+  fill:    muted !important;
+}
+#ai-meter-root .ai-me-icon svg path {
+  fill: muted !important;
+}
+#ai-meter-root .ai-me-caretBtn svg {
+  display: block !important;
+  width:   12px !important;
+  height:  12px !important;
+}
+#ai-meter-root .ai-me-caretBtn svg path {
+  stroke: white !important;
+  fill: none !important;
+}
+#ai-meter-root .ai-me-unit {
+  display:     block !important;
+  color:       var(--aim-muted) !important;
+  font-size:   12px !important; /* FONT SIZE: metric units (prompts, Wh, g CO₂) */
+  letter-spacing: .2px !important; 
+  white-space: nowrap !important;
+}
+
+/* ── Visibility + animation ────────────────────────────────────────────────── */
+
+/* Base transitions - fast and smooth */
+#ai-meter-root .ai-me-panel {
+  transition: opacity .14s cubic-bezier(0.2, 0, 0.2, 1), 
+              transform .14s cubic-bezier(0.2, 0, 0.2, 1) !important;
+  transform-origin: inherit !important;
+}
+
+/* ── Visibility + animation ────────────────────────────────────────────────── */
+
+/* Ultra-smooth transitions - NO transform on position changes */
+#ai-meter-root .ai-me-panel {
+  transition: opacity .16s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+}
+
+#ai-meter-root .ai-me-pill {
+  transition: opacity .16s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+}
+
+/* When becoming VISIBLE - instant appearance */
+#ai-meter-root[data-expanded="true"] .ai-me-panel,
+#ai-meter-root[data-expanded="false"] .ai-me-pill {
+  transition: none !important;
+}
+
+/* EXPANDED STATE */
+#ai-meter-root[data-expanded="true"] .ai-me-panel {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  z-index: 10 !important;
+}
+
+#ai-meter-root.left[data-expanded="true"] .ai-me-panel,
+#ai-meter-root.right[data-expanded="true"] .ai-me-panel {
+  transform: none !important;
+}
+
+#ai-meter-root.center[data-expanded="true"] .ai-me-panel {
+  transform: translateX(-50%) !important;
+}
+
+#ai-meter-root[data-expanded="true"] .ai-me-pill {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+#ai-meter-root.left[data-expanded="true"] .ai-me-pill,
+#ai-meter-root.right[data-expanded="true"] .ai-me-pill {
+  transform: none !important;
+}
+
+#ai-meter-root.center[data-expanded="true"] .ai-me-pill {
+  transform: translateX(-50%) !important;
+}
+
+/* COLLAPSED STATE */
+#ai-meter-root[data-expanded="false"] .ai-me-pill {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  z-index: 10 !important;
+}
+
+#ai-meter-root.left[data-expanded="false"] .ai-me-pill,
+#ai-meter-root.right[data-expanded="false"] .ai-me-pill {
+  transform: none !important;
+}
+
+#ai-meter-root.center[data-expanded="false"] .ai-me-pill {
+  transform: translateX(-50%) !important;
+}
+
+#ai-meter-root[data-expanded="false"] .ai-me-panel {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+#ai-meter-root.left[data-expanded="false"] .ai-me-panel,
+#ai-meter-root.right[data-expanded="false"] .ai-me-panel {
+  transform: none !important;
+}
+
+#ai-meter-root.center[data-expanded="false"] .ai-me-panel {
+  transform: translateX(-50%) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #ai-meter-root .ai-me-panel,
+  #ai-meter-root .ai-me-pill { 
+    transition: none !important; 
+  }
+  #ai-meter-root .ai-me-dot::after { 
+    animation: none !important; 
+  }
+}

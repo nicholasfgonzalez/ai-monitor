@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "AI Meter",
+  "version": "33.0.0",
+  "description": "Detect AI signals and estimate energy + carbon impact.",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "AI Meter"
+  }
+}
